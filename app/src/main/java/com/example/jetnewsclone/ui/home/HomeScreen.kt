@@ -100,7 +100,8 @@ fun HomeContentList(
                 PostCard(
                     post =  feed.recommendedPosts[index],
                     isBookmarked = feed.recommendedPosts[index].id in favourites,
-                    toggleBookmark = toggleBookmark
+                    toggleBookmark = toggleBookmark,
+                    onClick = openDetails
                 )
             }
             item { PopularPosts(posts = feed.popularPosts) }
@@ -108,7 +109,8 @@ fun HomeContentList(
                 PostCard(
                     post = feed.recentPosts[index],
                     isBookmarked = feed.recentPosts[index].id in favourites,
-                    toggleBookmark = toggleBookmark
+                    toggleBookmark = toggleBookmark,
+                    onClick = openDetails
                 )
             }
         },
