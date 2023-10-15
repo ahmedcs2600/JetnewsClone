@@ -23,7 +23,9 @@ fun JetNewsNavGraph(navController: NavHostController, openDrawer: () -> Unit) {
                 )
             }
             composable(route = Screen.Detail.route) {
-                DetailRoute()
+                DetailRoute(onBack = {
+                    navController.navigateUp()
+                })
             }
             composable(route = Screen.Interests.route) {
                 InterestRoute(openDrawer = openDrawer)

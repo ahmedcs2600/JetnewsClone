@@ -7,13 +7,16 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun HomeRoute(openDrawer: () -> Unit, openDetails: () -> Unit) {
-    val viewModel = hiltViewModel<HomeViewModel>()
+fun HomeRoute(
+    openDrawer: () -> Unit,
+    openDetails: () -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
+    ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HomeScreen(
         uiState = uiState,
         openDrawer = openDrawer,
         openDetails = openDetails,
-        viewModel::toggleFavourites
+        toggleBookmark = viewModel::toggleFavourites
     )
 }

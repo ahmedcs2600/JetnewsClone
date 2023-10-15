@@ -26,11 +26,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState: StateFlow<HomeUiState> = _uiState.stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        _uiState.value
-    )
+    val uiState: StateFlow<HomeUiState> = _uiState
 
     init {
         getPostFeed()

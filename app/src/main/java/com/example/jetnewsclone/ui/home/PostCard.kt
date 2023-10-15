@@ -1,6 +1,7 @@
 package com.example.jetnewsclone.ui.home
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -24,9 +25,10 @@ fun PostCard(
     post: Post,
     isBookmarked: Boolean,
     toggleBookmark: (String) -> Unit,
+    onClick: () -> Unit,
 ) {
     Row(
-        modifier.fillMaxWidth(),
+        modifier.fillMaxWidth().clickable { onClick() },
     ) {
         Image(painter = painterResource(post.imageThumbId), contentDescription = null)
         Spacer(modifier = Modifier.width(8.dp))

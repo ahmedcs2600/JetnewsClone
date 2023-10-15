@@ -1,9 +1,12 @@
 package com.example.jetnewsclone.ui.detail
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.BackHand
@@ -14,6 +17,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.jetnewsclone.R
@@ -22,28 +26,42 @@ import com.example.jetnewsclone.utils.MultiPreviews
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun DetailScreenTopBar() {
+internal fun DetailScreenTopBar(
+    title: String,
+    @DrawableRes image: Int,
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     CenterAlignedTopAppBar(
-        title = { TopBarTitle() },
-        navigationIcon = { NavigationBackButton() }
+        title = { TopBarTitle(
+            title,
+            image
+        ) },
+        navigationIcon = { NavigationBackButton(onBack) },
+        modifier = modifier
     )
 }
 
 @Composable
-private fun TopBarTitle() {
-    Row {
+private fun TopBarTitle(
+    title: String,
+    @DrawableRes image: Int,
+    modifier: Modifier = Modifier
+) {
+    Row(modifier = modifier) {
         Image(
-            painter = painterResource(id = R.drawable.icon_article_background),
-            contentDescription = null
+            painter = painterResource(id = image),
+            contentDescription = null,
+            modifier = Modifier.size(50.dp).clip(CircleShape)
         )
         Spacer(modifier = Modifier.width(20.dp))
-        Text(text = "Published in:\nAndroid Developers")
+        Text(text = title)
     }
 }
 
 @Composable
-private fun NavigationBackButton() {
-    IconButton(onClick = {  }) {
+private fun NavigationBackButton(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null)
     }
 }
@@ -52,6 +70,10 @@ private fun NavigationBackButton() {
 @Composable
 fun DetailScreenTopBarPreview() {
     JetNewTheme {
-        DetailScreenTopBar()
+        DetailScreenTopBar(
+            title = "Published in:\nAndroid Developers",
+            image = R.drawable.icon_article_background,
+            onBack = {}
+        )
     }
 }
